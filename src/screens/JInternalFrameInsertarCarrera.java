@@ -6,6 +6,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class JInternalFrameInsertarCarrera extends JInternalFrame{
@@ -90,5 +91,19 @@ public class JInternalFrameInsertarCarrera extends JInternalFrame{
                 )
         );
     }
+
+    private void insertarCarrera(){
+        int rows; 
+
+        int id = Integer.parseInt(txtId.getText());
+        String nombre = txtNombreCarrera.getText();
+        double monto = Double.parseDouble(txtMonto.getText());
+    
+
+    //revisar que los datos no esten vacios
+    if(id <= 0 || nombre.isEmpty() || monto <= 0){
+        JOptionPane.showMessageDialog(this,"Porfavor complete todos los campos correctamente.", "error", JOptionPane.ERROR_MESSAGE);
+    return;
+    }}
     
 }
