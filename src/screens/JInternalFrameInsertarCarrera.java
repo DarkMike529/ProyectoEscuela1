@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import models.Carrera;
+
 public class JInternalFrameInsertarCarrera extends JInternalFrame{
     private JLabel lblId;
     private JLabel lblNombreCarrera;
@@ -100,10 +102,30 @@ public class JInternalFrameInsertarCarrera extends JInternalFrame{
         double monto = Double.parseDouble(txtMonto.getText());
     
 
-    //revisar que los datos no esten vacios
-    if(id <= 0 || nombre.isEmpty() || monto <= 0){
+        //revisar que los datos no esten vacios
+        if(id <= 0 || nombre.isEmpty() || monto <= 0){
         JOptionPane.showMessageDialog(this,"Porfavor complete todos los campos correctamente.", "error", JOptionPane.ERROR_MESSAGE);
-    return;
-    }}
-    
+        return;
+        }
+
+        else{
+        //creamos un nuevo objeto carrera
+        Carrera carrera = new Carrera(id, nombre, monto);
+        //creamos un nuevo objeto carreradao
+        CarreraDAO carreraDAO = new CarreraDAO(this.conn);
+
+        rows = carreraDAO.insertarCarrera(carrera);
+
+        if (rows >0) {
+        JOptionPane.showMessageDialog(this, "Carrera inseratada correctamente ", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        txtId.setText("");
+        txtNombreCarrera.setText("");
+        txtMonto.setText("");
+        this.dispose();
+        } else {
+        JOptionPane.showMessageDialog(this, "Error al insertar la carrera", "Error",JOptionPane.INFORMATION_MESSAGE
+        );
+        }
+        }
+    } 
 }
